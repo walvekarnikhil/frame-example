@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+    
+    input.input {
+        display: none;
+    }
+    
+    span.button {
+        color: #007bff;
+        cursor: pointer;
+    }
+    
+    span.button:hover {
+        color: #0056b3;
+    }
+    
+  </style>
+</head>
+<body>
+  <label class="field">
+    <input id="input" class="input" type="file" accept="image/*" capture="environment" />
+    <span id="button" class="button">Capture video</span>
+  </label>
+  <script>
+    
+    var input = document.querySelector('#input');
+    
+    if ('capture' in input) {
+        input.addEventListener('change', function(e) {
+            var files = input.files;
+            if (files.length === 1) {
+                var file = files[0];
+                // using XHR/fetch API we are able to send to backend file as blob
+                // using FileReader class we are able to read file as base 64
+                console.log('Video type: ' + file.type);
+                console.log('Video size: ' + file.size + ' bytes');
+            } else {
+                console.log('Video not captured!');
+            }
+        });
+    } else {
+        var button = document.querySelector('#button');
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.error('Video capture mode is not supported! Try to use mobile device or other web browser.');
+        });
+    }
+
+  </script>
+</body>
+</html>
