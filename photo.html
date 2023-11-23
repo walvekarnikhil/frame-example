@@ -26,6 +26,14 @@
   <script>
     
     var input = document.querySelector('#input');
+
+    function draw() {
+  var canvas = document.getElementById('canvas');
+  canvas.width = this.width;
+  canvas.height = this.height;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(this, 0,0);
+}
     
     if ('capture' in input) {
         input.addEventListener('change', function(e) {
@@ -37,6 +45,10 @@
                 console.log('Video type: ' + file.type);
                 console.log('Video size: ' + file.size + ' bytes');
               document.querySelector("#message").innerHTML = "type: " + file.type;
+              var img = new Image();
+  img.onload = draw;
+  img.onerror = failed;
+  img.src = URL.createObjectURL(file);
             } else {
                 console.log('Video not captured!');
               document.querySelector("#message").innerHTML = "Not captured";
@@ -52,7 +64,7 @@
     }
 
   </script>
-
-  <div id="message">1</div>
+<canvas id="canvas"></canvas>
+  <div id="message">2</div>
 </body>
 </html>
