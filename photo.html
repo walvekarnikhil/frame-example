@@ -34,6 +34,11 @@
   var ctx = canvas.getContext('2d');
   ctx.drawImage(this, 0,0);
 }
+
+    function failed() {
+  console.error("The provided file couldn't be loaded as an Image media");
+      document.querySelector("#message").innerHTML = "The provided file couldn't be loaded as an Image media";
+}
     
     if ('capture' in input) {
         input.addEventListener('change', function(e) {
@@ -65,6 +70,6 @@
 
   </script>
 <canvas id="canvas"></canvas>
-  <div id="message">2</div>
+  <div id="message">3</div>
 </body>
 </html>
